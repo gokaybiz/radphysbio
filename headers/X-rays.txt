@@ -1,0 +1,25 @@
+#ExpID
+PMID
+#Exp
+CellLine
+Tissue
+CellClass
+CellCycle
+PhotonRadiation (MeV)
+Energy (MeV) 
+RBE
+LET(keV/μm)
+DoseRate(Gy/min)
+α
+β
+DSBs/(Gy*Gbp)
+nonDSBClusters/(Gy*Gbp)
+1keV_DSBs_1%O2
+1keV_Other_1%O2
+1keV_DSBs_20%O2
+1keV_Other_20%O2
+10keV_DSBs_1%O2
+10keV_Other_1%O2
+10keV_DSBs_20%O2
+10keV_Other_20%O2
+TypeofRadiation
