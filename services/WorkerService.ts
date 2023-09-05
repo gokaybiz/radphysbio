@@ -38,7 +38,7 @@ class WorkerService {
           if (mainEl != null) {
             setTimeout(() => {
               mainEl.scrollLeft = this.scrollPos.value;
-            }, 120);
+            }, 200);
           }
         }, 300);
     };
