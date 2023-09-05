@@ -3,7 +3,7 @@ import { type NuxtConfig } from "nuxt/schema";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 const CONFIG: NuxtConfig = {
   devtools: { enabled: true },
-  modules: ["@nuxtjs/fontaine", "@nuxtjs/critters", "@nuxtjs/google-fonts"],
+  modules: ["@nuxtjs/fontaine", "@nuxtjs/critters", "@nuxtjs/google-fonts", "@nuxtjs/tailwindcss"],
   nitro: {
     compressPublicAssets: true,
     preset: "netlify",
@@ -17,7 +17,6 @@ const CONFIG: NuxtConfig = {
       },
     },
   },
-  css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {
       tailwindcss: {},

@@ -14,13 +14,13 @@
     "@nuxtjs/critters": "^0.5.0",
     "@nuxtjs/fontaine": "^0.4.1",
     "@nuxtjs/google-fonts": "^3.0.2",
+    "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^18.17.1",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.48.0",
     "nuxt": "^3.6.5",
     "postcss": "^8.4.27",
-    "sass": "^1.64.2",
-    "tailwindcss": "^3.3.3"
+    "sass": "^1.64.2"
   },
   "dependencies": {
     "dexie": "4.0.1-alpha.25"
