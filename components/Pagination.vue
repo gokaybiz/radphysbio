@@ -49,8 +49,6 @@
 </template>
 
 <script setup>
-import { defineProps, computed } from "vue";
-
 const props = defineProps(["currentPage", "totalPages"]);
 const emit = defineEmits(["pageChange"]);
 
