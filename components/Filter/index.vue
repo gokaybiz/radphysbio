@@ -21,7 +21,7 @@
                 {{ column }}
               </option>
             </select>
-            <div class="w-full sm:flex-row sm:w-56 space-x-1">
+            <div class="min-w-full sm:flex-row sm:w-56 space-x-1">
               <input
                 :readonly="query.selectedColumn === ''"
                 placeholder="Search..."
