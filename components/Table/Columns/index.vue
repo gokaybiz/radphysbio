@@ -16,8 +16,6 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-
 const { column, sortedColumn } = defineProps({
   column: Object,
   sortedColumn: String,
