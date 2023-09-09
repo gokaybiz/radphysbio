@@ -71,6 +71,18 @@
 
 <script lang="ts" setup>
 const router = useRouter();
+
+useHead(() => ({
+  title: "404",
+  meta: [
+    {
+      hid: "description",
+      name: "description",
+      content: "Page not found",
+    },
+  ],
+}));
+
 const goBack = () => {
   router.push("/");
 };

@@ -86,6 +86,17 @@ const filterData = (data: any) => {
 const exportData = (type: string) => {
   workerService.exportData(type);
 };
+
+useHead(() => ({
+  title: "Homepage",
+  meta: [
+    {
+      hid: "description",
+      name: "description",
+      content: "Radiation Biology and Physics",
+    },
+  ],
+}));
 </script>
 
 <template>

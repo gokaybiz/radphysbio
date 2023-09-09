@@ -70,9 +70,9 @@
         <!-- Cart Icon -->
         <NuxtLink
           class="mr-4 text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-          to="/"
+          to="http://radbiodb.physics.ntua.gr/"
         >
-          RadBioPhys
+          RadBioBase
         </NuxtLink>
       </div>
     </div>
