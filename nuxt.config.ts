@@ -39,7 +39,7 @@ const CONFIG: NuxtConfig = {
   },
 
   vite: {
-    base: "./",
+    base: "/radbiophys/",
     build: {
       sourcemap: false,
     },
