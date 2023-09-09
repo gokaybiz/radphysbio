@@ -35,9 +35,11 @@ const CONFIG: NuxtConfig = {
       viewport: "width=device-width, initial-scale=1",
     },
     rootId: "__app",
+    baseURL: "/radbiophys/",
   },
 
   vite: {
+    base: "./",
     build: {
       sourcemap: false,
     },
