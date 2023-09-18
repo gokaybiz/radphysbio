@@ -42,7 +42,7 @@
         class="text-neutral-800 dark:text-neutral-400"
         href="http://physics.ntua.gr/index_en.html"
         target="_blank"
-        >RadBioPhys</a
+        >RadPhysBio</a
       >
     </div>
   </footer>

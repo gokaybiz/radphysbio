@@ -30,13 +30,13 @@ const CONFIG: NuxtConfig = {
 
   app: {
     head: {
-      titleTemplate: "%s - RadBioPhys",
-      title: "RadBioPhys",
+      titleTemplate: "%s - RadPhysBio",
+      title: "RadPhysBio",
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
     },
     rootId: "__app",
-    baseURL: "/radbiophys",
+    baseURL: "/radphysbio",
   },
 
   vite: {

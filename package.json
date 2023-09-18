@@ -24,6 +24,7 @@
     "sass": "^1.64.2"
   },
   "dependencies": {
-    "dexie": "4.0.1-alpha.25"
+    "dexie": "4.0.1-alpha.25",
+    "js-base64": "^3.7.5"
   }
 }

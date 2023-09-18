@@ -10,7 +10,7 @@ export default defineEventHandler((event) => {
   ) {
     return sendRedirect(
       event,
-      "http://radbiodb.physics.ntua.gr/radbiophys/",
+      "http://radbiodb.physics.ntua.gr/radphysbio/",
       301
     );
   }

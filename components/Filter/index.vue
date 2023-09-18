@@ -53,6 +53,7 @@
 
 <script setup lang="ts">
 import { PropType } from "nuxt/dist/app/compat/capi";
+import { decode, encode } from "js-base64";
 
 interface Query {
   id: number;
@@ -142,13 +143,19 @@ const updateURLQuery = (queries: Query[]) => {
     history.pushState({}, "", location.pathname);
   } else {
     // update url with base64 encoded query string
-    history.replaceState({}, "", `?${btoa(params.toString())}`);
+    history.replaceState(
+      {},
+      "",
+      `?${encodeURIComponent(encode(params.toString(), true))}`
+    );
   }
 };
 
 const loadFromURLQuery = () => {
   try {
-    const params = new URLSearchParams(atob(location.search.slice(1)));
+    const params = new URLSearchParams(
+      decodeURIComponent(decode(location.search.slice(1)))
+    );
     const queries: Query[] = [];
 
     params.forEach((value, key) => {
@@ -183,9 +190,9 @@ onMounted(() => {
   transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.slide-fade-enter-from, .slide-fade-leave-to {
+.slide-fade-enter-from,
+.slide-fade-leave-to {
   transform: translateX(-20px);
   opacity: 0;
 }
-
 </style>
