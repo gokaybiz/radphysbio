@@ -6,8 +6,9 @@ import {
 import {
   convertJsonToXml,
   convertJsonToXsv,
+  convertJsonToXlsx
 } from "../database/actions/converter";
-import { storeData, loadPageData } from "../database/actions/data";
+import { storeData, loadPageData, destroyDB } from "../database/actions/data";
 
 self.addEventListener(
   "message",
@@ -51,6 +52,11 @@ self.addEventListener(
         });
         break;
       }
+      case "destroyDB": {
+        await destroyDB();
+        self.postMessage({ action: "destroyDB" });
+        break;
+      }
       case "downloadData": {
         const { format } = event.data;
 
@@ -70,6 +76,8 @@ self.addEventListener(
           ret = convertJsonToXsv(data.data, ",");
         } else if (format === "tsv") {
           ret = convertJsonToXsv(data.data, "\t");
+        } else if (format === "xlsx") {
+          ret = await convertJsonToXlsx(data.data);
         } else {
           ret = JSON.stringify(data.data);
         }

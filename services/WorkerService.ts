@@ -51,6 +51,7 @@ class WorkerService {
       direction: this.direction.value,
       filters: this.filters.value,
     });
+
     // Watch for page changes and update the worker
     watch(
       [this.filters, this.page, this.pageSize, this.sortBy, this.direction],
@@ -79,6 +80,7 @@ class WorkerService {
         ) {
           this.page.value = 1;
         }
+
         this.worker.postMessage({
           action: "fetchData",
           page: this.page.value,
@@ -98,14 +100,23 @@ class WorkerService {
   }
 
   private async handleWorkerMessage(data: any): Promise<void> {
+    const [versionStatus, version] = await this.isLatestVersion(data);
     switch (data.action) {
       case "fetchData": {
-        const [versionStatus, version] = await this.isLatestVersion(data);
         if (!versionStatus) {
-          this.isVersionUpdating.value = true;
           // Fetch and add data to IndexedDB if an update is available
-          await this.fetchAndUpdateData(version);
+          await this.fetchAndUpdateData(version, 1);
+          this.isVersionUpdating.value = true;
         } else {
+          if (this.isVersionUpdating.value)
+            this.worker.postMessage({
+              action: "fetchData",
+              page: this.page.value,
+              pageSize: this.pageSize.value,
+              sortBy: this.sortBy.value,
+              direction: this.direction.value,
+              filters: this.filters.value,
+            });
           this.isVersionUpdating.value = false;
           // No update available
           this.items.value = data.data;
@@ -113,6 +124,10 @@ class WorkerService {
         this.version.value = version;
         break;
       }
+      case "destroyDB":
+        // old db deleted, fetch and add new data to IndexedDB
+        await this.fetchAndUpdateData(version, 2);
+        break;
       case "downloadData": {
         const { format, data: output, count } = data.data;
         // check format and download the data as blob obj
@@ -129,14 +144,23 @@ class WorkerService {
         const fileName = `${count}_items${suffix.value}`;
 
         // mime types
-        const mimeTypes: Record<string, string> = {
-          csv: "text/csv",
-          xml: "application/xml",
-          json: "application/json",
-          tsv: "text/tab-separated-values",
-        };
-        if (format in mimeTypes) {
-          this.blobDownload(output, format, mimeTypes[format], fileName);
+        enum mimeTypes {
+          csv = "text/csv",
+          xml = "application/xml",
+          json = "application/json",
+          tsv = "text/tab-separated-values",
+          xlsx = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        }
+
+        if (Object.keys(mimeTypes).includes(format as mimeTypes)) {
+          this.blobDownload(
+            output,
+            format,
+            mimeTypes[format as keyof typeof mimeTypes],
+            fileName
+          );
+        } else {
+          console.error("Invalid format");
         }
       }
       default:
@@ -153,16 +177,29 @@ class WorkerService {
     return [true, latestVersion];
   }
 
-  private async fetchAndUpdateData(newVersion: string): Promise<void> {
-    const data = await useFetch(this.runtimeConfig.app.dataUrl);
-    // Post the fetched data and version to the worker
-    this.worker.postMessage({
-      action: "storeData",
-      data: data.data.value,
-      version: newVersion,
-    });
+  private async fetchAndUpdateData(
+    newVersion: string,
+    step: 1 | 2
+  ): Promise<void> {
+    if (step === 1) {
+      if (!this.isVersionUpdating.value) {
+        console.log("destroy db triggered");
+        // Delete the old db
+        this.worker.postMessage({ action: "destroyDB" });
+      }
+    }
+    if (step === 2) {
+      const data = await useFetch(this.runtimeConfig.app.dataUrl);
 
-    console.log("Update needed");
+      // Post the fetched data and version to the worker
+      this.worker.postMessage({
+        action: "storeData",
+        data: data.data.value,
+        version: newVersion,
+      });
+
+      console.log("Update needed");
+    }
   }
 
   public exportData(format: string): void {

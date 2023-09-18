@@ -16,7 +16,7 @@ fields.value = [
     field: "PhotonRadiationMeV7",
     sort: true,
   },
-  { label: "Energy (MeV) ", field: "EnergyMeV8", sort: true },
+  { label: "Energy (MeV)", field: "EnergyMeV8", sort: true },
   { label: "RBE", field: "RBE9", sort: true },
   { label: "LET(keV/μm)", field: "LETkeVm10", sort: true },
   { label: "Dose Rate (Gy/min)", field: "DoseRateGymin11", sort: true },
@@ -37,7 +37,6 @@ fields.value = [
   { label: "10keV_DSBs_20%O2", field: "keVDSBsO22", sort: true },
   { label: "10keV_Other_20%O2", field: "keVOtherO23", sort: true },
   { label: "Type of Radiation", field: "TypeofRadiation24", sort: true },
-  { label: "Energy (MeV)", field: "EnergyMeV25", sort: true },
   { label: "LET (keV/μm)", field: "LETkeVm26", sort: true },
   {
     label: "Irradiation Conditions",

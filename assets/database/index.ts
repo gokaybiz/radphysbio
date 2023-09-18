@@ -28,7 +28,6 @@ interface DataTable {
   keVDSBsO22: number | string;
   keVOtherO23: number | string;
   TypeofRadiation24: string;
-  EnergyMeV25: number | string;
   LETkeVm26: number | string;
   IrradiationConditions27: string;
   "DoseRate (Gy/min)": number | string;
@@ -50,7 +49,7 @@ class Database extends Dexie {
   constructor() {
     super(dbName);
     this.version(0.1).stores({
-      data: "++id,ExpID0,PMID1,Exp2,CellLine3,Tissue4,CellClass5,CellCycle6,PhotonRadiationMeV7,EnergyMeV8,RBE9,LETkeVm10,DoseRateGymin11,Alpha12,Beta13,DSBsGyGbp14,nonDSBClustersGyGbp15,keVDSBsO16,keVOtherO17,keVDSBsO18,keVOtherO19,keVDSBsO20,keVOtherO21,keVDSBsO22,keVOtherO23,TypeofRadiation24,EnergyMeV25,LETkeVm26,IrradiationConditions27,DoseRateGymin28,DSBsO29,OtherO30,DSBsO31,OtherO32,Source33", // data store here with auto-increment primary key and other columns as indexes
+      data: "++id,ExpID0,PMID1,Exp2,CellLine3,Tissue4,CellClass5,CellCycle6,PhotonRadiationMeV7,EnergyMeV8,RBE9,LETkeVm10,DoseRateGymin11,Alpha12,Beta13,DSBsGyGbp14,nonDSBClustersGyGbp15,keVDSBsO16,keVOtherO17,keVDSBsO18,keVOtherO19,keVDSBsO20,keVOtherO21,keVDSBsO22,keVOtherO23,TypeofRadiation24,LETkeVm26,IrradiationConditions27,DoseRateGymin28,DSBsO29,OtherO30,DSBsO31,OtherO32,Source33", // data store here with auto-increment primary key and other columns as indexes
       metaData: "key", // meta-data store
     });
     // FData store

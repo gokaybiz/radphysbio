@@ -1,5 +1,4 @@
 import db from "..";
-import type Dexie from "dexie";
 
 interface DataTable {
   id?: number;
@@ -28,7 +27,6 @@ interface DataTable {
   keVDSBsO22: number | string;
   keVOtherO23: number | string;
   TypeofRadiation24: string;
-  EnergyMeV25: number | string;
   LETkeVm26: number | string;
   IrradiationConditions27: string;
   "DoseRate (Gy/min)": number | string;
@@ -60,7 +58,7 @@ const map = [
   { CellClass: "CellClass5" },
   { CellCycle: "CellCycle6" },
   { "PhotonRadiation (MeV)": "PhotonRadiationMeV7" },
-  { "Energy (MeV) ": "EnergyMeV8" },
+  { "Energy (MeV)": "EnergyMeV8" },
   { RBE: "RBE9" },
   { "LET(keV/μm)": "LETkeVm10" },
   { "DoseRate(Gy/min)": "DoseRateGymin11" },
@@ -77,7 +75,6 @@ const map = [
   { "10keV_DSBs_20%O2": "keVDSBsO22" },
   { "10keV_Other_20%O2": "keVOtherO23" },
   { TypeofRadiation: "TypeofRadiation24" },
-  { "Energy (MeV)": "EnergyMeV25" },
   { "LET (keV/μm)": "LETkeVm26" },
   { IrradiationConditions: "IrradiationConditions27" },
   { "DoseRate(Gy/min)": "DoseRateGymin28" },
@@ -237,4 +234,13 @@ async function storeData(
   }
 }
 
-export { loadPageData, storeData };
+async function destroyDB(): Promise<void> {
+  try {
+    await db.delete();
+    await db.open();
+    console.log("Database deleted successfully");
+  } catch (error) {
+    console.error("Error deleting database:", error);
+  }
+}
+export { loadPageData, storeData, destroyDB };

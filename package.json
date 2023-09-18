@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "dexie": "4.0.1-alpha.25",
-    "js-base64": "^3.7.5"
+    "js-base64": "^3.7.5",
+    "xlsx": "^0.18.5"
   }
 }

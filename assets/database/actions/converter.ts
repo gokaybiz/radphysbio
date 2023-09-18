@@ -1,6 +1,8 @@
+import type { WorkSheet } from "xlsx/types";
 interface JsonObject {
   [key: string]: JsonObject | string | number | boolean;
 }
+
 function escapeKeyNames(obj: { [key: string]: any }): { [key: string]: any } {
   const escapedObj: { [key: string]: any } = {};
 
@@ -79,4 +81,35 @@ function convertJsonToXsv(
   return xsvData;
 }
 
-export { convertJsonToXml, convertJsonToXsv };
+function autoFitColumns(worksheet: WorkSheet): void {
+  const maxWidths: Record<string, number> = {};
+
+  Object.keys(worksheet).forEach(cell => {
+    const cellValue = worksheet[cell]?.v;
+    if (!cellValue || typeof cellValue !== 'string') return;
+
+    // Extract the column from the cell reference
+    const column = cell.replace(/\d/g, '');
+
+    // Update maxWidths with the greater of the current max or the length of the new cell value
+    maxWidths[column] = Math.max((maxWidths[column] || 0), cellValue.length + 1);
+  });
+
+  worksheet['!cols'] = Object.values(maxWidths).map(width => ({ width }));
+}
+
+// ! Doesnt work, need to fix
+function convertJsonToXlsx(jsonData: JsonObject[]): Promise<string> {
+  return new Promise((resolve, reject) => {
+    import("xlsx").then((xlsx) => {
+      const wb = xlsx.utils.book_new();
+      const ws = xlsx.utils.json_to_sheet(jsonData);
+      // autoFitColumns(ws);
+      xlsx.utils.book_append_sheet(wb, ws, "RadPhysBio");
+      const wbout = xlsx.write(wb, { type: "binary", bookType: "xlsx" });
+      resolve(wbout);
+    });
+  });
+}
+
+export { convertJsonToXml, convertJsonToXsv, convertJsonToXlsx };

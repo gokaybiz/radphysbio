@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 const emit = defineEmits(["export"]);
 const isDropdownOpen = ref(false);
-const exportOptions = ["CSV", "TSV", "JSON", "XML"];
+const exportOptions = ["CSV", "TSV", "XLSX", "JSON", "XML"];
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
