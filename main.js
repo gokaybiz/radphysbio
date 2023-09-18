@@ -19,6 +19,12 @@ import { default as glob } from "fast-glob";
 
     // Make different columns equal Gbp*Gy -> Gy*Gbp
     data = data.map((item) => {
+      // Remove extra spaces from columns
+      Object.entries(item).forEach(([key, value]) => {
+        delete item[key];
+        item[key.trim()] = value;
+      });
+
       if ("DSBs/(Gbp*Gy)" in item) {
         item["DSBs/(Gy*Gbp)"] = item["DSBs/(Gbp*Gy)"];
         delete item["DSBs/(Gbp*Gy)"];
@@ -31,7 +37,6 @@ import { default as glob } from "fast-glob";
       item["TypeofRadiation"] = file.name.replace(".xlsx", "");
       return item;
     });
-
     const headers = Object.keys(data[0]);
     await writeFile(
       `./headers/${file.name.replace("xlsx", "txt")}`,

@@ -6,7 +6,7 @@ Tissue
 CellClass
 CellCycle
 PhotonRadiation (MeV)
-Energy (MeV) 
+Energy (MeV)
 RBE
 LET(keV/μm)
 DoseRate(Gy/min)
