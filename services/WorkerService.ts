@@ -35,6 +35,7 @@ class WorkerService {
     this.setupWorker();
     this.watchPageChanges();
     onBeforeUnmount(() => {
+      console.log('unmounting worker')
       this.loading.value = true;
       this.worker.terminate();
     });
@@ -154,10 +155,9 @@ class WorkerService {
   private handleDownloadDataAction(data: any): void {
     const fileName = this.generateFileName(data);
     const format = data.format;
-
     if (Object.keys(MimeTypes).includes(format as MimeTypes)) {
       this.blobDownload(
-        data.output,
+        data.data,
         format,
         MimeTypes[format as keyof typeof MimeTypes],
         fileName

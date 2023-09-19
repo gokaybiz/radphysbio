@@ -169,16 +169,13 @@ const loadPageData = async (
       };
       return response;
     }
+
     const dataPaginated = await data
       .offset(startIndex)
       .limit(pageSize)
       .toArray();
-
     const response = {
-      data: dataPaginated.map((item) => {
-        delete item.id;
-        return item;
-      }),
+      data: dataPaginated,
       count,
     };
     return response;
@@ -209,6 +206,9 @@ async function storeData(
         try {
           if (trimmedValue.startsWith("(-)") === true) {
             trimmedValue = trimmedValue.replace("(-)", "-");
+          }
+          if (trimmedValue.endsWith("*") === true) {
+            trimmedValue = trimmedValue.replace("*", "");
           }
         } catch (_) {}
 
