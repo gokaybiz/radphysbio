@@ -71,9 +71,20 @@ const props = defineProps({
   },
 });
 
+const idColumn = props.columns.findIndex(
+  (column) => column[0] === "id"
+);
+if (idColumn !== -1) {
+  props.columns.splice(idColumn, 1);
+}
+
+console.log(props.columns)
 const { columns }: Props = props;
+
 const emit = defineEmits(["filter"]);
 const data = ref<Query[]>([]);
+
+const urlTracker = ref();
 
 const debounce = <T extends (...args: any[]) => void>(
   fn: T,
@@ -179,6 +190,12 @@ const emitAndUpdate = debounce(() => {
 
 onMounted(() => {
   loadFromURLQuery();
+  urlTracker.value = window.addEventListener("popstate", () => {
+    loadFromURLQuery();
+  });
+});
+onUnmounted(() => {
+  window.removeEventListener("popstate", urlTracker.value);
 });
 </script>
 <style lang="scss" scoped>

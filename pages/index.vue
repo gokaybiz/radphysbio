@@ -4,6 +4,7 @@ import Filter from "@/components/Filter/index.vue";
 
 const fields: Ref<any[]> = ref([]);
 fields.value = [
+  { label: "ID", field: "id", sort: true },
   { label: "#ExpID", field: "ExpID0", sort: true },
   { label: "PMID", field: "PMID1", sort: true },
   { label: "#Exp", field: "Exp2", sort: true },

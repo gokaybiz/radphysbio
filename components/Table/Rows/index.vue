@@ -1,9 +1,15 @@
 <template>
   <tr>
-    <td v-for="(row, rowIndex) in row" :key="rowIndex" class="px-6 py-4 whitespace-nowrap text-center">{{ row }}</td>
+    <td
+      v-for="column in columns"
+      :key="column.field"
+      class="px-6 py-4 whitespace-nowrap text-center"
+    >
+      {{ row[column.field] }}
+    </td>
   </tr>
 </template>
 
 <script setup>
-const { row } = defineProps(['row']);
+const { row, columns } = defineProps(["row", "columns"]);
 </script>

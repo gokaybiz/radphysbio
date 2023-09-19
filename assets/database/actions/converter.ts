@@ -1,4 +1,6 @@
 import type { WorkSheet } from "xlsx/types";
+import * as xlsx from "xlsx";
+
 interface JsonObject {
   [key: string]: JsonObject | string | number | boolean;
 }
@@ -81,35 +83,60 @@ function convertJsonToXsv(
   return xsvData;
 }
 
-function autoFitColumns(worksheet: WorkSheet): void {
-  const maxWidths: Record<string, number> = {};
+function buildColumnsArray(sheet: WorkSheet): string[] {
+  const alphaToNum = (alpha: string) => {
+    return (
+      alpha
+        .split("")
+        .reduce((acc, letter) => acc * 26 + letter.charCodeAt(0) - 64, 0) - 1
+    );
+  };
 
-  Object.keys(worksheet).forEach(cell => {
-    const cellValue = worksheet[cell]?.v;
-    if (!cellValue || typeof cellValue !== 'string') return;
+  const numToAlpha = (num: number): string => {
+    let alpha = "";
+    for (; num >= 0; num = Math.floor(num / 26) - 1) {
+      alpha = String.fromCharCode((num % 26) + 65) + alpha;
+    }
+    return alpha;
+  };
 
-    // Extract the column from the cell reference
-    const column = cell.replace(/\d/g, '');
+  const [start, end] = sheet["!ref"]!.split(":").map((ref) =>
+    alphaToNum(ref.replace(/\d/g, ""))
+  );
 
-    // Update maxWidths with the greater of the current max or the length of the new cell value
-    maxWidths[column] = Math.max((maxWidths[column] || 0), cellValue.length + 1);
-  });
-
-  worksheet['!cols'] = Object.values(maxWidths).map(width => ({ width }));
+  return Array.from({ length: end - start + 1 }, (_, i) =>
+    numToAlpha(start + i)
+  );
 }
 
-// ! Doesnt work, need to fix
-function convertJsonToXlsx(jsonData: JsonObject[]): Promise<string> {
-  return new Promise((resolve, reject) => {
-    import("xlsx").then((xlsx) => {
-      const wb = xlsx.utils.book_new();
-      const ws = xlsx.utils.json_to_sheet(jsonData);
-      // autoFitColumns(ws);
-      xlsx.utils.book_append_sheet(wb, ws, "RadPhysBio");
-      const wbout = xlsx.write(wb, { type: "binary", bookType: "xlsx" });
-      resolve(wbout);
-    });
+function autoFitColumns(worksheet: WorkSheet): void {
+  const columns = buildColumnsArray(worksheet);
+  const lastRow = xlsx.utils.decode_range(worksheet["!ref"]!).e.r;
+
+  const columnWidths = columns.map((column) => {
+    let maxCellLength = 0;
+
+    for (let row = 1; row <= lastRow + 1; row++) {
+      const cell = worksheet[`${column}${row}`];
+      if (cell) {
+        maxCellLength = Math.max(maxCellLength, Math.ceil(cell.v.length * 1.1));
+      }
+    }
+
+    return { width: maxCellLength };
   });
+
+  worksheet["!cols"] = columnWidths;
+}
+
+function convertJsonToXlsx(jsonData: JsonObject[]): string {
+    const wb = xlsx.utils.book_new();
+    const ws = xlsx.utils.json_to_sheet(jsonData);
+    autoFitColumns(ws);
+    xlsx.utils.book_append_sheet(wb, ws, "RadPhysBio");
+    const wbout = xlsx.write(wb, { type: "buffer", bookType: "xlsx" });
+    console.log("resolved");
+    return wbout;
 }
 
 export { convertJsonToXml, convertJsonToXsv, convertJsonToXlsx };

@@ -20,6 +20,7 @@
           v-for="(row, rowIndex) in props.data"
           :key="rowIndex"
           :row="row"
+          :columns="props.columns"
         />
       </tbody>
     </table>
