@@ -46,7 +46,7 @@ The project is a Vue.js application using the Nuxt.js framework, focused on radi
 | **Dependencies**   | The system relies on several external libraries and frameworks, including Nuxt.js, Vue.js, Dexie (IndexedDB wrapper), xlsx-js for dynamic excel file generation and Tailwind CSS. These dependencies provide functionality for server-side rendering, database management, front-end development, and styling. |
 | **Modularity**     | The codebase demonstrates good modularity by organizing components, layouts, pages, and assets into separate directories. Each component focuses on a specific functionality, making it easier to understand, maintain, and enhance the system. The usage of Vue.js components and Nuxt.js modules contributes to modularity and reusability. |
 | **Performance**    | The system leverages server-side rendering provided by Nuxt.js, which helps with initial page load time and enhances SEO. Furthermore, the codebase utilizes efficient data management with IndexedDB and Dexie, enabling fast data retrieval and handling.|
-| **Integrations**   | The system integrates with various tools and technologies. Notable integrations include the use of Dexie and IndexedDB for data storage and retrieval,
+| **Integrations**   | The system integrates with various tools and technologies. Notable integrations include the use of Dexie and IndexedDB for data storage and retrieval.
 
 ---
 
