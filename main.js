@@ -1,9 +1,15 @@
 import excel from "xlsx";
-import { writeFile } from "fs/promises";
-import { default as glob } from "fast-glob";
+import {
+  writeFile
+} from "fs/promises";
+import {
+  default as glob
+} from "fast-glob";
 
 (async () => {
-  const files = await glob("xlsx/*.xlsx", { objectMode: true });
+  const files = await glob("xlsx/*.xlsx", {
+    objectMode: true
+  });
   console.log("List of files:");
   console.log(files.map((file) => file.name));
 
@@ -55,7 +61,8 @@ import { default as glob } from "fast-glob";
   allHeaders = [...new Set(allHeaders)];
 
   const checkIfExists = (header, item) =>
-    Object.keys(item).includes(header) ? true : false;
+    !!Object.keys(item).includes(header);
+
   allData = allData.map((data) => {
     allHeaders.forEach((header) => {
       if (!checkIfExists(header, data)) {
@@ -65,4 +72,5 @@ import { default as glob } from "fast-glob";
     return data;
   });
   await writeFile(`./all-json/all.json`, Buffer.from(JSON.stringify(allData)));
+  await writeFile('./lastUpdate.txt', Buffer.from(new Date().toISOString()));
 })();
