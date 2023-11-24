@@ -6,6 +6,16 @@ import {
   default as glob
 } from "fast-glob";
 
+// https://stackoverflow.com/a/175787
+function isNumeric(str) {
+  if (typeof str != "string") {
+    return false;
+  }
+  return !isNaN(str) && !isNaN(parseFloat(str));
+}
+
+
+
 (async () => {
   const files = await glob("xlsx/*.xlsx", {
     objectMode: true
@@ -29,6 +39,13 @@ import {
       Object.entries(item).forEach(([key, value]) => {
         delete item[key];
         item[key.trim()] = value;
+        if (typeof value === "string") {
+          item[key.trim()] = value.replaceAll(/(\r\n|\n|\r)/g, "").trim();
+          const commaToDot = item[key.trim()].replaceAll(',', '.');
+          if (isNumeric(commaToDot)) {
+            item[key.trim()] = parseFloat(commaToDot);
+          }
+        }
       });
 
       if ("DSBs/(Gbp*Gy)" in item) {
