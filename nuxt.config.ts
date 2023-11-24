@@ -50,9 +50,9 @@ CONFIG.runtimeConfig = {
   app: {
     rootId: "__app",
     dataUrl:
-      "https://gist.githubusercontent.com/gokaybiz/6dd46ee65764a07ddc8580d0bc4a8c86/raw/806546e9ea37a2b895cb48584ace31bc5dc1cb8b/all.json",
+      "https://gist.githubusercontent.com/gokaybiz/6dd46ee65764a07ddc8580d0bc4a8c86/raw/6069fb1271e646c1c05a566ce9ee02d4ed35d235/all.json",
     lastUpdateUrl:
-      "https://gist.githubusercontent.com/gokaybiz/6dd46ee65764a07ddc8580d0bc4a8c86/raw/806546e9ea37a2b895cb48584ace31bc5dc1cb8b/last_update.txt",
+      "https://gist.githubusercontent.com/gokaybiz/6dd46ee65764a07ddc8580d0bc4a8c86/raw/6069fb1271e646c1c05a566ce9ee02d4ed35d235/last_update.txt",
   },
 };
 
