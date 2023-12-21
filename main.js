@@ -35,19 +35,6 @@ function isNumeric(str) {
 
     // Make different columns equal Gbp*Gy -> Gy*Gbp
     data = data.map((item) => {
-      // Remove extra spaces from columns
-      Object.entries(item).forEach(([key, value]) => {
-        delete item[key];
-        item[key.trim()] = value;
-        if (typeof value === "string") {
-          item[key.trim()] = value.replaceAll(/(\r\n|\n|\r)/g, "").trim();
-          const commaToDot = item[key.trim()].replaceAll(',', '.');
-          if (isNumeric(commaToDot)) {
-            item[key.trim()] = parseFloat(commaToDot);
-          }
-        }
-      });
-
       if ("DSBs/(Gbp*Gy)" in item) {
         item["DSBs/(Gy*Gbp)"] = item["DSBs/(Gbp*Gy)"];
         delete item["DSBs/(Gbp*Gy)"];
@@ -56,6 +43,22 @@ function isNumeric(str) {
         item["nonDSBClusters/(Gy*Gbp)"] = item["nonDSBClusters/(Gbp*Gy)"];
         delete item["nonDSBClusters/(Gbp*Gy)"];
       }
+
+      // Remove extra spaces from columns
+      Object.entries(item).forEach(([key, value]) => {
+        delete item[key];
+        item[key.trim()] = value;
+        if (typeof value === "string") {
+          item[key.trim()] = value.replaceAll(/(\r\n|\n|\r)/g, "").trim();
+          // Replace commas with dots in numbers
+          const commaToDot = item[key.trim()].replaceAll(',', '.');
+          if (isNumeric(commaToDot)) {
+            item[key.trim()] = parseFloat(commaToDot);
+          } else if (key === "DSBs/(Gy*Gbp)") {
+            item[key.trim()] = commaToDot;
+          }
+        }
+      });
 
       item["TypeofRadiation"] = file.name.replace(".xlsx", "");
       return item;
