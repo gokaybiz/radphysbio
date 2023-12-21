@@ -8,8 +8,6 @@ CellCycle
 PhotonRadiation (MeV)
 Energy (MeV)
 RBE
-LET(keV/μm)
-DoseRate(Gy/min)
 α
 β
 DSBs/(Gy*Gbp)
@@ -23,4 +21,6 @@ nonDSBClusters/(Gy*Gbp)
 10keV_Other_1%O2
 10keV_DSBs_20%O2
 10keV_Other_20%O2
+LET (keV/μm)
+DoseRate (Gy/min)
 TypeofRadiation

@@ -33,7 +33,7 @@ function isNumeric(str) {
     // Convert to JSON
     let data = excel.utils.sheet_to_json(workBook.Sheets[firstSheet]);
 
-    // Make different columns equal Gbp*Gy -> Gy*Gbp
+    // Make different columns equal Gbp*Gy -> Gy*Gbp - normalize column names
     data = data.map((item) => {
       if ("DSBs/(Gbp*Gy)" in item) {
         item["DSBs/(Gy*Gbp)"] = item["DSBs/(Gbp*Gy)"];
@@ -42,6 +42,14 @@ function isNumeric(str) {
       if ("nonDSBClusters/(Gbp*Gy)" in item) {
         item["nonDSBClusters/(Gy*Gbp)"] = item["nonDSBClusters/(Gbp*Gy)"];
         delete item["nonDSBClusters/(Gbp*Gy)"];
+      }
+      if ("LET(keV/μm)" in item) {
+        item["LET (keV/μm)"] = item["LET(keV/μm)"];
+        delete item["LET(keV/μm)"];
+      }
+      if ("DoseRate(Gy/min)" in item) {
+        item["DoseRate (Gy/min)"] = item["DoseRate(Gy/min)"];
+        delete item["DoseRate(Gy/min)"];
       }
 
       // Remove extra spaces from columns
