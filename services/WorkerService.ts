@@ -154,7 +154,7 @@ class WorkerService {
 
   private handleDownloadDataAction(data: any): void {
     const fileName = this.generateFileName(data);
-    const format = data.format;
+    const {format} = data;
     if (Object.keys(MimeTypes).includes(format as MimeTypes)) {
       this.blobDownload(
         data.data,

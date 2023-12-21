@@ -1,4 +1,5 @@
 import db from "..";
+import type { Collection } from "dexie";
 
 interface DataTable {
   id?: number;
@@ -17,6 +18,7 @@ interface DataTable {
   Alpha12: number | string;
   Beta13: number | string;
   DSBsGyGbp14: string;
+  FiguresTables: string;
   nonDSBClustersGyGbp15: number | string;
   keVDSBsO16: number | string;
   keVOtherO17: number | string;
@@ -65,6 +67,7 @@ const map = [
   { α: "Alpha12" },
   { β: "Beta13" },
   { "DSBs/(Gy*Gbp)": "DSBsGyGbp14" },
+  { "Figures/Tables": "FiguresTables" },
   { "nonDSBClusters/(Gy*Gbp)": "nonDSBClustersGyGbp15" },
   { "1keV_DSBs_1%O2": "keVDSBsO16" },
   { "1keV_Other_1%O2": "keVOtherO17" },
@@ -97,7 +100,7 @@ const loadPageData = async (
   try {
     const parsedFilters: Filter[] = JSON.parse(filters);
 
-    let data = db.data.orderBy(column);
+    let data: Collection<DataTable, number> = db.data.orderBy(column);
     if (parsedFilters.length > 0) {
       // Create a map to store grouped filters
       const groupedFilters = new Map<string, Filter[]>();
@@ -112,7 +115,7 @@ const loadPageData = async (
       });
 
       // Apply filters
-      data = data.filter((row) => {
+      data = data.filter((row: DataTable) => {
         // "and" logic for each group, check if any of the filters in the group match
         return [...groupedFilters.values()].every((group) => {
           // "or" logic for each filter in the group, check if the row value includes the filter value
@@ -151,11 +154,15 @@ const loadPageData = async (
 
       dataWhole = dataWhole.map((item: any) => {
         const nonSpecialCharKey = new Map();
-        // Just for iterating over the Map, nothing else related to the map high order function
 
+        // Just for iterating over the flatMap, nothing else related to the map high order function return value
         map.flatMap((dict): null => {
           const [[newKey, key]] = Object.entries(dict);
 
+          // do not include figures/tables in the download
+          if (key == "FiguresTables") {
+            return null;
+          }
           nonSpecialCharKey.set(newKey, item[key]);
 
           return null;

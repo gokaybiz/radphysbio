@@ -78,7 +78,7 @@ if (idColumn !== -1) {
   props.columns.splice(idColumn, 1);
 }
 
-console.log(props.columns)
+// console.log(props.columns)
 const { columns }: Props = props;
 
 const emit = defineEmits(["filter"]);
@@ -179,7 +179,7 @@ const loadFromURLQuery = () => {
     data.value = queries;
     emit("filter", data.value);
   } catch (error) {
-    console.log("Filter data seems corrupted", error);
+    console.error("Filter data seems corrupted", error);
   }
 };
 

@@ -24,6 +24,7 @@ fields.value = [
   { label: "α", field: "Alpha12", sort: true },
   { label: "β", field: "Beta13", sort: true },
   { label: "DSBs/(Gy*Gbp)", field: "DSBsGyGbp14", sort: true },
+  { label: "Figures/Tables", field: "FiguresTables", sort: true },
   {
     label: "non DSBClusters/(Gy*Gbp)",
     field: "nonDSBClustersGyGbp15",
