@@ -29,9 +29,7 @@ interface DataTable {
   keVDSBsO22: number | string;
   keVOtherO23: number | string;
   TypeofRadiation24: string;
-  LETkeVm26: number | string;
   IrradiationConditions27: string;
-  "DoseRate (Gy/min)": number | string;
   DSBsO29: string;
   OtherO30: string;
   DSBsO31: string;
@@ -62,8 +60,8 @@ const map = [
   { "PhotonRadiation (MeV)": "PhotonRadiationMeV7" },
   { "Energy (MeV)": "EnergyMeV8" },
   { RBE: "RBE9" },
-  { "LET(keV/μm)": "LETkeVm10" },
-  { "DoseRate(Gy/min)": "DoseRateGymin11" },
+  { "LET (keV/μm)": "LETkeVm10" },
+  { "Dose Rate (Gy/min)": "DoseRateGymin11" },
   { α: "Alpha12" },
   { β: "Beta13" },
   { "DSBs/(Gy*Gbp)": "DSBsGyGbp14" },
@@ -78,9 +76,7 @@ const map = [
   { "10keV_DSBs_20%O2": "keVDSBsO22" },
   { "10keV_Other_20%O2": "keVOtherO23" },
   { TypeofRadiation: "TypeofRadiation24" },
-  { "LET (keV/μm)": "LETkeVm26" },
   { IrradiationConditions: "IrradiationConditions27" },
-  { "DoseRate(Gy/min)": "DoseRateGymin28" },
   { "DSBs_1%O2": "DSBsO29" },
   { "Other_1%O2": "OtherO30" },
   { "DSBs_20%O2": "DSBsO31" },
