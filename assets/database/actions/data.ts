@@ -61,7 +61,7 @@ const map = [
   { "Energy (MeV)": "EnergyMeV8" },
   { RBE: "RBE9" },
   { "LET (keV/μm)": "LETkeVm10" },
-  { "Dose Rate (Gy/min)": "DoseRateGymin11" },
+  { "DoseRate (Gy/min)": "DoseRateGymin11" },
   { α: "Alpha12" },
   { β: "Beta13" },
   { "DSBs/(Gy*Gbp)": "DSBsGyGbp14" },
