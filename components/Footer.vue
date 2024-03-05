@@ -60,8 +60,6 @@ const descriptions = [
     CellCycle:
       "Cell cycle phase (phases are given explicitly in each case, or noted by ‘a’ for ‘asynchronous’ cell lines)",
     Source: "Type of radioactive source",
-    "PhotonRadiation (MeV)":
-      "Maximum photon energy of X-ray tubes or linear accelerators",
     "Energy (MeV)": "Specific radiation energy, evaluated at the target",
     RBE: "Relative Biological Effectiveness",
     "LET (keV/μm)": "Linear Energy Transfer in water",

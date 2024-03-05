@@ -10,7 +10,6 @@ interface DataTable {
   Tissue4: string;
   CellClass5: string;
   CellCycle6: string;
-  PhotonRadiationMeV7: string | number;
   EnergyMeV8: string | number;
   RBE9: number | string;
   LETkeVm10: string | number;
@@ -57,7 +56,6 @@ const map = [
   { Tissue: "Tissue4" },
   { CellClass: "CellClass5" },
   { CellCycle: "CellCycle6" },
-  { "PhotonRadiation (MeV)": "PhotonRadiationMeV7" },
   { "Energy (MeV)": "EnergyMeV8" },
   { RBE: "RBE9" },
   { "LET (keV/μm)": "LETkeVm10" },

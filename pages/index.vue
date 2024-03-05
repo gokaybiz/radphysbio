@@ -12,11 +12,6 @@ fields.value = [
   { label: "Tissue", field: "Tissue4", sort: true },
   { label: "Cell Class", field: "CellClass5", sort: true },
   { label: "Cell Cycle", field: "CellCycle6", sort: true },
-  {
-    label: "Photon Radiation (MeV)",
-    field: "PhotonRadiationMeV7",
-    sort: true,
-  },
   { label: "Energy (MeV)", field: "EnergyMeV8", sort: true },
   { label: "RBE", field: "RBE9", sort: true },
   { label: "LET (keV/μm)", field: "LETkeVm10", sort: true },
