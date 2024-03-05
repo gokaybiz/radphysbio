@@ -5,7 +5,6 @@ CellLine
 Tissue
 CellClass
 CellCycle
-PhotonRadiation (MeV)
 Energy (MeV)
 RBE
 α
