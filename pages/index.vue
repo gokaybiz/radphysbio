@@ -101,7 +101,7 @@ useHead(() => ({
           class="text-lg font-medium"
           v-if="loading === false || items?.data?.length > 0"
         >
-          Total data count: {{ items.count || 0 }}/2734
+          Total data count: {{ items.count || 0 }}/2787
         </p>
         <p v-if="version !== ''" class="text-sm text-gray-600 mb-3">
           Last update: {{ version }}
