@@ -20,6 +20,12 @@ nonDSBClusters/(Gy*Gbp)
 10keV_Other_1%O2
 10keV_DSBs_20%O2
 10keV_Other_20%O2
+TypeofRadiation
+IrradiationConditions
+DSBs_1%O2
+Other_1%O2
+DSBs_20%O2
+Other_20%O2
+Source
 LET (keV/μm)
 DoseRate (Gy/min)
-TypeofRadiation

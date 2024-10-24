@@ -5,7 +5,6 @@ CellLine
 Tissue
 CellClass
 CellCycle
-Source
 Energy (MeV)
 RBE
 LET (keV/μm)
@@ -15,8 +14,18 @@ DoseRate (Gy/min)
 DSBs/(Gy*Gbp)
 Figures/Tables
 nonDSBClusters/(Gy*Gbp)
+1keV_DSBs_1%O2
+1keV_Other_1%O2
+1keV_DSBs_20%O2
+1keV_Other_20%O2
+10keV_DSBs_1%O2
+10keV_Other_1%O2
+10keV_DSBs_20%O2
+10keV_Other_20%O2
+TypeofRadiation
+IrradiationConditions
 DSBs_1%O2
 Other_1%O2
 DSBs_20%O2
 Other_20%O2
-TypeofRadiation
+Source
